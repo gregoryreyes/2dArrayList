@@ -14,7 +14,7 @@ public class TwoDArrayList {
     System.out.print("Please enter your username: ");
     String name = "2d/" + sc.nextLine();
 
-    System.out.println("Welcome " + name + "\n");
+    System.out.println("\nWelcome " + name + "\n");
 
     String options = "Commands:\n1. \"server\" - Shows server connections.\n2. \"connect\" - Connects a client to the server.\n3. \"disconnect\" - Disconnects a client from the server.\n\"options\" - Shows this menu.\n\"about\" - Shows information about this program.\n\"exit\" - Ends program.";
 
@@ -47,15 +47,41 @@ public class TwoDArrayList {
       if (selection.equalsIgnoreCase("connect") || selection.equals("2") ) {
         try {
           System.out.println("The server has 10 sockets. Which socket would you like to connect to? Please select a number between 1 and 10");
-          System.out.print(name + "> ");
+          System.out.print(">>> ");
           int chooseSocket = sc.nextInt();
           
           if ( chooseSocket > 0 && chooseSocket < 11) {
             System.out.println("connecting...");
             int[] cnSocket = {chooseSocket};
-            serverConnect(cnSocket, myServer);
             Thread.sleep(2000);
-            System.out.print("Connected successfully. Enter \"server\" to view connections. \n");
+            serverConnect(cnSocket, myServer);
+            System.out.print("Enter \"server\" to view connections. \n");
+          } else {
+            System.out.println("Socket selection must be a number between 1 and 10");
+            Thread.sleep(3000);
+            System.out.println(options);
+          }
+
+        } catch (Exception e) {
+          System.err.println("Interrupted: " + e.getMessage() + ". Socket selection must be a number between 1 and 10");
+          System.out.println(options);
+        }
+      }
+
+      if (selection.equalsIgnoreCase("disconnect") || selection.equals("3") ) {
+        try {
+          System.out.print("Server connections: " + myServer + "\n" + name + "> " );
+
+          System.out.println("Select a socket to disconnect client from. Socket selection must be a number between 1 and 10");
+          System.out.print( ">>> ");
+          int chooseSocket = sc.nextInt();
+          
+          if ( chooseSocket > 0 && chooseSocket < 11) {
+            System.out.println("disconnecting...");
+            Thread.sleep(2000);
+            int[] dnSocket = {chooseSocket};
+            serverDisconnect(dnSocket, myServer);
+            System.out.print("Enter \"server\" to view current connections. \n");
           } else {
             System.out.println("Socket selection must be a number between 1 and 10");
             Thread.sleep(3000);
@@ -97,6 +123,23 @@ public class TwoDArrayList {
             System.out.println("Socket " + clientsToStart[i] + " has reached it's capacity. Each socket can only hold up to three connections. Please select another socket or disconnect a client from socket " + clientsToStart[i] );
           } else {
             myServer.get(j).add(clientsToStart[i]);
+          }
+        }
+      }
+    }
+
+    return myServer;
+  }
+
+  public static ArrayList<ArrayList<Integer>> serverDisconnect( int[] clientsToEnd, ArrayList<ArrayList<Integer>> myServer ) {
+    
+    for (int i = 0; i < clientsToEnd.length; i++) {
+      for (int j = 0; j < myServer.size(); j++) {
+        if ( clientsToEnd[i] -1 == j ) {
+          if ( myServer.get(j).size() == 0 ) {
+            System.out.println( "There aren't any clients connected to Socket " + clientsToEnd[i] );
+          } else {
+            myServer.get(j).remove(0);
           }
         }
       }
