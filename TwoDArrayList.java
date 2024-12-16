@@ -14,7 +14,18 @@ public class TwoDArrayList {
     System.out.print("Please enter your username: ");
     String name = "2d/" + sc.nextLine();
 
-    System.out.println("\nWelcome " + name + "\n");
+    // System.out.println("\nWelcome " + name + "\n");
+    System.out.println("\n\n" + //
+            "\n" + //
+                            " __          __  _                          \n" + //
+                            " \\ \\        / / | |                         \n" + //
+                            "  \\ \\  /\\  / /__| | ___ ___  _ __ ___   ___ \n" + //
+                            "   \\ \\/  \\/ / _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\\n" + //
+                            "    \\  /\\  /  __/ | (_| (_) | | | | | |  __/\n" + //
+                            "     \\/  \\/ \\___|_|\\___\\___/|_| |_| |_|\\___|\n" + //
+                            "                                            \n" + //
+                            "                                            \n" + //
+                            "");
 
     String options = "Commands:\n1. \"server\" - Shows server connections.\n2. \"connect\" - Connects a client to the server.\n3. \"disconnect\" - Disconnects a client from the server.\n\"options\" - Shows this menu.\n\"about\" - Shows information about this program.\n\"exit\" - Ends program.";
 
@@ -50,7 +61,7 @@ public class TwoDArrayList {
           System.out.print(">>> ");
           int chooseSocket = sc.nextInt();
           
-          if ( chooseSocket > 0 && chooseSocket < 11) {
+          if (chooseSocket > 0 && chooseSocket < 11) {
             System.out.println("connecting...");
             int[] cnSocket = {chooseSocket};
             Thread.sleep(2000);
@@ -110,7 +121,7 @@ public class TwoDArrayList {
 
     sc.close();
 
-    System.out.println("myServer end ---> " + myServer );
+    System.out.println( "myServer end ---> " + myServer );
 
   }
 
